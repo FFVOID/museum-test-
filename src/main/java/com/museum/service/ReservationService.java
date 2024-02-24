@@ -92,7 +92,7 @@ public class ReservationService {
 	                ReservedHistDto reservedHistDto = new ReservedHistDto(reserved);
 	                List<ReservationDto> reservationDtoList = reserved.getReservationList()
 	                        .stream()
-	                        .map(ReservationDto::new) // 또는 reservationItem -> new ReservationDto(reservationItem)
+	                        .map(ReservationDto::new) 
 	                        .collect(Collectors.toList());
 	                reservedHistDto.setReservationDtoList(reservationDtoList);
 	                return reservedHistDto;

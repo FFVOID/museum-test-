@@ -3,6 +3,7 @@ package com.museum.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,14 +65,10 @@ public class BoardService {
 	@Transactional(readOnly = true)
 	public BoardDto getBoardDtl(Long boardId) {
 		
-		List<BoardImg> boardImgList = boardImgRepository.findByBoardIdOrderByIdAsc(boardId);
-		
-		List<BoardImgDto> boardImgDtoList = new ArrayList<>();
-		for(BoardImg boardImg : boardImgList) {
-			BoardImgDto boardImgDto = BoardImgDto.of(boardImg);
-			
-			boardImgDtoList.add(boardImgDto);
-		}
+		List<BoardImgDto> boardImgDtoList = boardImgRepository.findByBoardIdOrderByIdAsc(boardId)
+				.stream()
+				.map(BoardImgDto::of)
+				.collect(Collectors.toList());
 		
 		Board board = boardRepository.findById(boardId).orElseThrow(EntityNotFoundException::new);
 		
