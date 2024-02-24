@@ -65,10 +65,15 @@ public class BoardService {
 	@Transactional(readOnly = true)
 	public BoardDto getBoardDtl(Long boardId) {
 		
-		List<BoardImgDto> boardImgDtoList = boardImgRepository.findByBoardIdOrderByIdAsc(boardId)
-				.stream()
-				.map(BoardImgDto::of)
-				.collect(Collectors.toList());
+		List<BoardImg> boardImgList = boardImgRepository.findByBoardIdOrderByIdAsc(boardId);
+
+		List<BoardImgDto> boardImgDtoList = new ArrayList<>();
+		
+		for(BoardImg boardImg : boardImgList) {
+			BoardImgDto boardImgDto = BoardImgDto.of(boardImg);
+
+			boardImgDtoList.add(boardImgDto);
+		}
 		
 		Board board = boardRepository.findById(boardId).orElseThrow(EntityNotFoundException::new);
 		

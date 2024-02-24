@@ -41,10 +41,13 @@ public class BoardCommentService {
 	@Transactional(readOnly = true)
 	public List<BoardCommentDto> getBoardCmtDto(Long boardId) {
 		
-		List<BoardCommentDto> boardCmtDtoList = boardCmtRepository.findAllByBoardId(boardId)
-				.stream()
-				.map(BoardCommentDto::of)
-				.collect(Collectors.toList());
+		List<BoardComment> boardCmtList = boardCmtRepository.findAllByBoardId(boardId);
+		
+		List<BoardCommentDto> boardCmtDtoList = new ArrayList<>();
+		
+		for(BoardComment boardCmt : boardCmtList) {
+			boardCmtDtoList.add(BoardCommentDto.of(boardCmt));
+		}
 		
 		return boardCmtDtoList;
 	}
