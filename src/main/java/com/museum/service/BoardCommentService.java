@@ -27,7 +27,7 @@ public class BoardCommentService {
 	private final BoardCommentRepository boardCmtRepository;
 	private final BoardRepository boardRepository;
 	
-	
+	//댓글 등록
 	public void saveComment(BoardComment boardComment) {
 		
 		boardCmtRepository.save(boardComment);
