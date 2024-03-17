@@ -34,28 +34,28 @@
 </div>
 
 ### :closed_book: ERD 설계도
-![ERD](https://github.com/FFVOID/museum-test-/assets/130435247/3245ddbc-3e54-4db1-92ba-539cb0dc5a68)
+![ERD](https://github.com/FFVOID/museum-test-/assets/130435247/8af0c471-7a84-4509-ba0b-4537eb558559)
 
 ### :green_book: 유스케이스 설계도
-![유스케이스](https://github.com/FFVOID/museum-test-/assets/130435247/a8b58af6-9452-4aa3-8e68-2dff1fdaab07)
+![유스케이스](https://github.com/FFVOID/museum-test-/assets/130435247/ee81cb9a-e422-4615-bcf9-efbb0870ec0a)
 
 ### :one: 회원가입(유저는 이메일, 비밀번호를 입력하여 가입)
-![회원가입1](https://github.com/FFVOID/museum-test-/assets/130435247/4a7fabe2-35fc-4714-a1ba-2af42224e0b6)
+![회원가입1](https://github.com/FFVOID/museum-test-/assets/130435247/6b8c7297-fcce-4426-891e-69e1abe8a006)
 
 ### :two: api를 이용한 회원가입(카카오 로그인을 통해 간편가입)
-![회원가입2](https://github.com/FFVOID/museum-test-/assets/130435247/2d5b62aa-f769-4de2-9ef0-4053e1f479af)
+![회원가입2](https://github.com/FFVOID/museum-test-/assets/130435247/cb45e48b-a2f1-419c-9793-8b7557479a68)
 
 ### :three: 전시등록,관리(관리자 기능)
-![전시관리](https://github.com/FFVOID/museum-test-/assets/130435247/8c4ff460-2f44-46d0-92bf-4f90c0555ebf)
+![전시관리](https://github.com/FFVOID/museum-test-/assets/130435247/71edef49-dfc9-42ab-a962-5c0e8197bc8c)
 
 ### :four: 전시예약,취소,수정
-![전시예약,취소,수정](https://github.com/FFVOID/museum-test-/assets/130435247/aa6a9add-6aa9-4ed7-90c3-be9eb11c119b)
+![전시예약,취소,수정](https://github.com/FFVOID/museum-test-/assets/130435247/65492a0d-e1cd-4380-af40-4832a4edf994)
 
 ### :five: 전시리스트,검색
-![전시리스트,검색](https://github.com/FFVOID/museum-test-/assets/130435247/824aeeb5-d51a-4e4b-963d-ef923e306856)
+![전시리스트,검색](https://github.com/FFVOID/museum-test-/assets/130435247/7aa4dfc5-f55f-423c-885d-6a3e7a8201cd)
 
 ### :six: 게시판 글쓰기,수정,삭제 기능(이미지,댓글포함)
-![게시판글쓰기,수정,삭제(이미지포함,댓글)](https://github.com/FFVOID/museum-test-/assets/130435247/3c2b0795-bf97-4acd-b0c1-207c99a19daa)
+![게시판글쓰기,수정,삭제(이미지포함,댓글)](https://github.com/FFVOID/museum-test-/assets/130435247/3486d335-1efc-4af0-940c-69bdab1e37f3)
 
 ### :seven: 회원탈퇴
-![회원탈퇴](https://github.com/FFVOID/museum-test-/assets/130435247/d5ce50d6-f572-4784-9f89-46b426ac3070)
+![회원탈퇴](https://github.com/FFVOID/museum-test-/assets/130435247/08d7063c-1e10-4584-a3b7-a590573aa262)
