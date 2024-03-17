@@ -4,7 +4,7 @@
 
 <div>
   <h2> :bulb: 프로젝트 소개</h2>
-	스프링 부트(MVC패턴) + JPA + Mysql를 이용한 박물관 사이트
+	스프링 부트(MVC패턴) + JPA + Mysql + api를 이용한 박물관 사이트
 </div>
 
 <div align="left">
