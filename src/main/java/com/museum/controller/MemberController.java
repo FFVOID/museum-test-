@@ -181,9 +181,10 @@ public class MemberController {
 	    
 	    Member member = memberRepository.findByUserId(userId);
 
-	    // 사용자가 입력한 현재 비밀번호와 데이터베이스에서 가져온 암호화된 비밀번호를 비교합니다.
+	    //입력한 비밀번호와 사용자가 입력한 비번을 비교
 	    if (passwordEncoder.matches(delMemberDto.getPassword(), member.getPassword())) {
-	        // 비밀번호가 일치하는 경우, 탈퇴 작업을 수행합니다.
+	        
+	    	//일치하면 탈퇴진행
 	    	memberService.deleteMember(member.getId());
 	    	
 	        SecurityContextHolder.clearContext(); // 로그아웃

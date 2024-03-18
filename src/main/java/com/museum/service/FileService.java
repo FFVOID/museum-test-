@@ -13,6 +13,7 @@ import lombok.extern.java.Log;
 public class FileService {
 	//파일 업로드
 	public String uploadFile(String uploadPath, String originalFileName, byte[] fileData) throws Exception{
+		
 		UUID uuid = UUID.randomUUID();
 		
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -29,6 +30,7 @@ public class FileService {
 	}
 	
 	public void deleteFile(String filePath) throws Exception {
+		
 		File deleteFile = new File(filePath);
 		
 		if(deleteFile.exists()) { //해당경로에 파일이 있으면

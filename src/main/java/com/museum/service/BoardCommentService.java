@@ -53,13 +53,15 @@ public class BoardCommentService {
 	}
 	
 	public Page<BoardCommentDto> getBoardCmtPage(Long boardId, Pageable pageable) {
-	    Page<BoardComment> boardComments = boardCmtRepository.findCmtByBoardId(boardId, pageable);
+	    
+		Page<BoardComment> boardComments = boardCmtRepository.findCmtByBoardId(boardId, pageable);
 	    
 	    return boardComments.map(comment -> new BoardCommentDto(comment));
 	}
 	
 	public void deleteCmt(Long cmtId) {
-        Optional<BoardComment> cmtOptional = boardCmtRepository.findById(cmtId);
+        
+		Optional<BoardComment> cmtOptional = boardCmtRepository.findById(cmtId);
         if (cmtOptional.isPresent()) {
             boardCmtRepository.delete(cmtOptional.get());
         } else {

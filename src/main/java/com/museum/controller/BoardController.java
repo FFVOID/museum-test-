@@ -46,6 +46,7 @@ public class BoardController {
 	
 	@GetMapping(value = "/boards/new")
 	public String newBoardMain(Model model, Principal principal) {
+		
 		BoardDto boardDto = BoardDto.createBoardDto(principal);
 		
 		model.addAttribute("boardDto", boardDto);
@@ -54,8 +55,7 @@ public class BoardController {
 	
 	@PostMapping(value = "/boards/new")
 	public String newBoard(@Valid BoardDto boardDto, BindingResult bindingResult, Model model,
-		@RequestParam("boardImgFile") List<MultipartFile> boardImgFileList, Board boards
-		) {
+		@RequestParam("boardImgFile") List<MultipartFile> boardImgFileList, Board boards) {
 		
 		//유효성검사 에러체크
 		if(bindingResult.hasErrors()) {
@@ -74,8 +74,7 @@ public class BoardController {
 	
 	//게시판 글 리스트 페이지
 	@GetMapping(value = {"/boards/list", "/boards/list/{page}"})
-	public String boardListPage(BoardSearchDto boardSearchDto,
-		@PathVariable("page") Optional<Integer>page, Model model) {
+	public String boardListPage(BoardSearchDto boardSearchDto, @PathVariable("page") Optional<Integer>page, Model model) {
 		
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0 , 10);
 		
@@ -91,8 +90,7 @@ public class BoardController {
 	//게시글 상세 페이지
 	@GetMapping(value = "/boards/view/{boardId}")
 	public String boardView(Model model, @PathVariable("boardId") Long boardId , Principal principal,
-		@RequestParam(name = "page", defaultValue = "1") int page,
-		@RequestParam(name = "size", defaultValue = "10") int size) {
+		@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
 		
 		BoardDto boardDto = boardService.getBoardDtl(boardId);
 		String cmtWriter = principal.getName();
@@ -128,7 +126,7 @@ public class BoardController {
 	//글수정
 	@PostMapping(value = "/boards/modify/{boardId}")
 	public String updateBoard(@Valid BoardDto boardDto, BindingResult bindingResult, Model model,
-	    @RequestParam("boardImgFile") List<MultipartFile> boardImgFileList) {
+			@RequestParam("boardImgFile") List<MultipartFile> boardImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
 			return "/board/modify";
@@ -147,7 +145,8 @@ public class BoardController {
 	
 	//수정시 이미지 삭제
 	@PostMapping(value = "/boards/deleteImg/{boardImgId}")
-	public ResponseEntity<String> deleteImg(@PathVariable("boardImgId") Long boardImgId){
+	public ResponseEntity<String> deleteImg(@PathVariable("boardImgId") Long boardImgId) {
+		
 		try {
 			boardService.deleteImg(boardImgId);
 			return ResponseEntity.ok("이미지 삭제 성공");
@@ -158,8 +157,7 @@ public class BoardController {
 	
 	//댓글 등록
 	@PostMapping(value = "/saveComment")
-	public String saveCmt(@RequestBody Map<String, Object> requestBody,
-		@AuthenticationPrincipal Object principal) {
+	public String saveCmt(@RequestBody Map<String, Object> requestBody, @AuthenticationPrincipal Object principal) {
 		
 		String cmtWriter = (String) requestBody.get("cmtWriter");
 		String cmtContent = (String) requestBody.get("cmtContent");
@@ -192,6 +190,7 @@ public class BoardController {
 	//댓글삭제
 	@DeleteMapping(value = "/boards/deleteCmt/{cmtId}")
 	public ResponseEntity<String> deleteCmt(@PathVariable("cmtId") Long cmtId){
+		
 		try {
 			boardService.deleteCmt(cmtId);
 			return ResponseEntity.ok("댓글 삭제 완료");
@@ -203,6 +202,7 @@ public class BoardController {
 	//글삭제
 	@DeleteMapping(value = "/boards/deleteBoard/{boardId}")
 	public ResponseEntity<String> deleteBoard(@PathVariable("boardId") Long boardId){
+		
 		try {
 			boardService.deleteBoard(boardId);
 			return ResponseEntity.ok("글이 삭제 되었습니다.");

@@ -34,11 +34,11 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		//로그인에 대한 설정
 		http.authorizeHttpRequests(authorize -> authorize //페이지 접근권한에 관한 설정
-				.requestMatchers("/css/**" , "/js/**" , "/img/**" ,"/webfonts/**" ).permitAll()
-				.requestMatchers("/", "/members/**", "/exhibition/**" , "/email/**").permitAll()
-				.requestMatchers("/favicon.ico", "/error").permitAll()
-				.requestMatchers("/admin/**").hasRole("ADMIN")
-				.anyRequest().authenticated())
+					.requestMatchers("/css/**" , "/js/**" , "/img/**" ,"/webfonts/**" ).permitAll()
+					.requestMatchers("/", "/members/**", "/exhibition/**" , "/email/**").permitAll()
+					.requestMatchers("/favicon.ico", "/error").permitAll()
+					.requestMatchers("/admin/**").hasRole("ADMIN")
+					.anyRequest().authenticated())
 			.oauth2Login(oauth2 -> oauth2 
 					.loginPage("/members/login")
 					.userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
@@ -47,10 +47,10 @@ public class SecurityConfig {
 					.failureUrl("/members/login/error")
 					)
 			.formLogin(formLogin -> formLogin 
-						 .loginPage("/members/login")
-						 .defaultSuccessUrl("/") 
-						 .usernameParameter("userId")
-						 .failureUrl("/members/login/error"))
+					 .loginPage("/members/login")
+					 .defaultSuccessUrl("/") 
+					 .usernameParameter("userId")
+					 .failureUrl("/members/login/error"))
 			.logout(logout -> logout //로그아웃 설정 
 					.logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
 					.logoutSuccessUrl("/"))

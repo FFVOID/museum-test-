@@ -39,6 +39,7 @@ public class BoardService {
 	
 	//글등록
 	public Long saveBoard(BoardDto boardDto, List<MultipartFile> boardImgFileList, Board boards) throws Exception {
+		
 		Board board = boardDto.createBoard();
 		board.setMember(memberRepository.findByUserId(board.getWriter()));
 		boardRepository.save(board);
@@ -57,6 +58,7 @@ public class BoardService {
 	//게시판 검색, 페이지 처리
 	@Transactional(readOnly = true)
 	public Page<Board> getBoardPage(BoardSearchDto boardSearchDto, Pageable pageable){
+		
 		Page<Board> boardPage = boardRepository.getBoardPage(boardSearchDto, pageable);
 		return boardPage;
 	}
@@ -89,6 +91,7 @@ public class BoardService {
 	
 	//수정
 	public Long updateBoard(BoardDto boardDto, List<MultipartFile> boardImgFileList) throws Exception {
+		
 		Board board = boardRepository.findById(boardDto.getId())
 									.orElseThrow(EntityNotFoundException::new);
 		
@@ -120,6 +123,7 @@ public class BoardService {
 	
 	//글삭제
 	public void deleteBoard(Long boardId) {
+		
 		Optional<Board> boardOptional = boardRepository.findById(boardId);
 		
 		if (boardOptional.isPresent()) {

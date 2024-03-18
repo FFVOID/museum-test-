@@ -61,6 +61,7 @@ public class ItemImgService {
 	}
 	
 	public void deleteItemImg(Long itemImgId) {
+		
 		ItemImg savedItemImg = itemImgRepository.findById(itemImgId)
 				.orElseThrow(EntityNotFoundException::new);
 		

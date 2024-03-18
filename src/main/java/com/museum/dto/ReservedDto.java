@@ -30,6 +30,7 @@ public class ReservedDto {
 	private static ModelMapper modelMapper = new ModelMapper();
 	
 	public static ReservedDto of (Reservation reservation) {
+		
 		Reservation reservations = new Reservation();
 		return modelMapper.map(reservation, ReservedDto.class);
 	}

@@ -52,6 +52,7 @@ public class Member {
 	private String providerId; // 카카오 기본키 id값
 	
 	public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+		
 		Member member = new Member();
 		
 		String password = passwordEncoder.encode(memberFormDto.getPassword());
@@ -66,6 +67,7 @@ public class Member {
 	}
 	
 	public static Member createSocialMember(SocialMemberDto socialMemberDto, PasswordEncoder passwordEncoder) {
+		
 		Member member = new Member();
 		
 		String password = passwordEncoder.encode(socialMemberDto.getPassword());
@@ -83,6 +85,7 @@ public class Member {
 	
 	@Builder(builderClassName = "OAuth2Register", builderMethodName = "oauth2Register")
 	public Member(String name, String password, String email, Role role, String provider, String providerId) {
+		
 		this.name = name;
 		this.password = password;
 		this.email = email;

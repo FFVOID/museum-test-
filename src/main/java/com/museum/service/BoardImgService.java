@@ -22,6 +22,7 @@ public class BoardImgService {
 	private final FileService fileService;
 	
 	public void saveBoardImg(BoardImg boardImg, MultipartFile boardImgFile) throws Exception{
+		
 		String oriImgName = boardImgFile.getOriginalFilename();
 		String imgName = "";
 		String imgUrl = "";
@@ -36,6 +37,7 @@ public class BoardImgService {
 	}
 	
 	public void updateBoardImg(Long boardImgId, MultipartFile boardImgFile) throws Exception {
+		
 		if(!boardImgFile.isEmpty()) {
 			BoardImg savedBoardImg = boardImgRepository.findById(boardImgId)
 													.orElseThrow(EntityNotFoundException::new);
@@ -53,8 +55,9 @@ public class BoardImgService {
 	}
 	
 	public void deleteBoardImg(Long boardImgId) {
+		
 		BoardImg savedBoardImg = boardImgRepository.findById(boardImgId)
-				.orElseThrow(EntityNotFoundException::new);
+										 .orElseThrow(EntityNotFoundException::new);
 		
 		String oriImgName = null;
 		String imgName = null;

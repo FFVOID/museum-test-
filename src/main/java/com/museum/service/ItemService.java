@@ -103,6 +103,7 @@ public class ItemService {
 	//검색 , 페이지처리
 	@Transactional(readOnly = true)
 	public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+		
 		Page<Item> itemPage = itemRepository.getAdminItemPage(itemSearchDto, pageable);
 		return itemPage;
 	}
@@ -110,6 +111,7 @@ public class ItemService {
 	//메인
 	@Transactional(readOnly = true)
 	public Page<MainItemDto> getMainPage(Pageable pageable){
+		
 		Page<MainItemDto> mainItemPage = itemRepository.getMainItemPage(pageable);
 		
 		return mainItemPage;

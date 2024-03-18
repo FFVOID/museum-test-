@@ -25,7 +25,8 @@ public class MailController {
 	
 	@PostMapping("/email") // /mail로 들어오면 post방식으로 메일을 전송
     public @ResponseBody ResponseEntity MailSend(@RequestBody EmailDto emailDto,Model model) throws MessagingException{
-    	boolean memberCheck = memberService.findMember(emailDto.getEmail());
+    	
+		boolean memberCheck = memberService.findMember(emailDto.getEmail());
     			
     	if(!memberCheck) {
     		return new ResponseEntity<>("이미 가입된 이메일입니다.", HttpStatus.BAD_REQUEST);

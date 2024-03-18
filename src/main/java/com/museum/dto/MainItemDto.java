@@ -22,8 +22,7 @@ public class MainItemDto {
 	private String oriImgName;
 	
 	@QueryProjection
-	public MainItemDto(Long id, String itemNm, String itemDetail, String itemDate
-			, String imgUrl, String oriImgName) {
+	public MainItemDto(Long id, String itemNm, String itemDetail, String itemDate, String imgUrl, String oriImgName) {
 		this.id = id;
 		this.itemNm = itemNm;
 		this.itemDetail = itemDetail;

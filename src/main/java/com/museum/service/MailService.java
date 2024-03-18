@@ -24,10 +24,10 @@ public class MailService {
     }
 
     public MimeMessage createMail(String email) throws MessagingException {
-        createNumber(); // 랜덤으로 난수 설정
+        createNumber(); //랜덤으로 난수 설정
         MimeMessage message = javaMailSender.createMimeMessage();
 
-        // 송신자 설정
+        //송신자 설정
         try {
             message.setFrom(new InternetAddress(senderEmail, senderName));
         } catch (UnsupportedEncodingException e) {

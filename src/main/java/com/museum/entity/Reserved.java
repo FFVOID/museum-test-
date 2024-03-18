@@ -51,6 +51,7 @@ public class Reserved extends BaseEntity{
 	
 	//예약생성(예약완료)
 	public static Reserved createReserved(Member member, List<Reservation> reservationItemList) {
+		
 		Reserved reserved = new Reserved();
 		reserved.setMember(member);
 		
@@ -64,6 +65,7 @@ public class Reserved extends BaseEntity{
 	}
 	
 	public void updateReserved(ReservedHistDto reservedHistDto) {
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SS");
 		
 		LocalDateTime date = LocalDateTime.parse(reservedHistDto.getReservedDate(), formatter);

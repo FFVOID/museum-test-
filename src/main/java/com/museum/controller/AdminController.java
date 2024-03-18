@@ -35,6 +35,7 @@ public class AdminController {
 	//전시 등록 페이지
 	@GetMapping(value = "/admin/newItem")
 	public String newItem(Model model) {
+		
 		model.addAttribute("newItemDto", new NewItemDto());
 		return "admin/newItem";
 	}
@@ -42,7 +43,7 @@ public class AdminController {
 	//전시,소장품이미지 등록
 	@PostMapping(value = "/admin/newItem")
 	public String itemNew(@Valid NewItemDto newItemDto, BindingResult bindingResult, Model model, 
-		@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Item items) {
+			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Item items) {
 		
 		if(bindingResult.hasErrors()) {
 			return "admin/newItem";
@@ -65,8 +66,7 @@ public class AdminController {
 	
 	//전시관리페이지
 	@GetMapping(value = {"/admin/itemList", "/admin/itemList/{page}"})
-	public String itemManage(ItemSearchDto itemSearchDto,
-		@PathVariable("page") Optional<Integer> page, Model model) {
+	public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 		
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0 , 5);
 		
@@ -83,6 +83,7 @@ public class AdminController {
 	//수정할 전시의 저장된 정보를 불러옴
 	@GetMapping(value = "/admin/item/{itemId}")
 	public String itemDtl(@PathVariable("itemId") Long itemId, Model model) {
+		
 		try {
 			NewItemDto newItemDto = itemService.getItemDtl(itemId);
 			model.addAttribute("newItemDto", newItemDto);
@@ -101,7 +102,7 @@ public class AdminController {
 	//전시 수정기능
 	@PostMapping(value = "/admin/item/{itemId}")
 	public String itemUpdate(@Valid NewItemDto newItemDto, BindingResult bindingResult, Model model,
-		@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
+			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
 			return "item/newItem";
@@ -127,6 +128,7 @@ public class AdminController {
 	//수정시 이미지 삭제
 	@PostMapping(value = "/item/deleteImg/{itemImgId}")
 	public ResponseEntity<String> deleteImg(@PathVariable("itemImgId") Long itemImgId){
+		
 		try {
 			itemService.deleteItemImg(itemImgId);
 			return ResponseEntity.ok("이미지 삭제 성공");
@@ -137,8 +139,7 @@ public class AdminController {
 	
 	//예약 가능한 전시 리스트 페이지
 	@GetMapping(value = {"/exhibition/list", "/exhibition/list/{page}"})
-	public String itemListPage(ItemSearchDto itemSearchDto, @PathVariable("page")
-	Optional<Integer> page, Model model) {
+	public String itemListPage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
 		
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0 , 6);
 		
@@ -154,6 +155,7 @@ public class AdminController {
 	//전시 상세 페이지
 	@GetMapping(value = "/exhibition/{itemId}")
 	public String ExDtl(Model model, @PathVariable("itemId") Long itemId) {
+		
 		NewItemDto newItemDto = itemService.getItemDtl(itemId);
 		model.addAttribute("exhibition", newItemDto);
 		
@@ -163,6 +165,7 @@ public class AdminController {
 	//전시 삭제
 	@DeleteMapping(value = "/item/deleteItem/{itemId}")
 	public ResponseEntity<String> deleteItem(@PathVariable("itemId") Long itemId){
+		
 		try {
 			itemService.deleteItem(itemId);
 			return ResponseEntity.ok("전시가 삭제 되었습니다.");

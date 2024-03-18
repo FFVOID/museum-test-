@@ -52,8 +52,7 @@ public class ReservationController {
 	
 	//전시 예약 기능
 	@PostMapping(value = "/reservation/item")
-	public @ResponseBody ResponseEntity reserved(@RequestBody @Valid ReservedDto reservedDto,
-		BindingResult bindingResult, Principal principal) {
+	public @ResponseBody ResponseEntity reserved(@RequestBody @Valid ReservedDto reservedDto, BindingResult bindingResult, Principal principal) {
 		
 		if(bindingResult.hasErrors()) {
 			StringBuilder sb = new StringBuilder();
@@ -81,8 +80,7 @@ public class ReservationController {
 	
 	//예약리스트
 	@GetMapping(value = {"/reservation/list", "/reservation/list/{page}"})
-	public String reservationList(ReservedHistDto reservedHistDto, @PathVariable("page") Optional<Integer> page,
-		Principal principal, Model model) {
+	public String reservationList(ReservedHistDto reservedHistDto, @PathVariable("page") Optional<Integer> page,Principal principal, Model model) {
 		
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
 		
@@ -125,8 +123,7 @@ public class ReservationController {
 	
 	//예약 수정 기능
 	@PostMapping(value = "/reservation/update/{reservedId}")
-	public String reservedUpdate(@Valid ReservedDto reservedDto, BindingResult bindingResult,
-		Model model, ReservedHistDto reservedHistDto) {
+	public String reservedUpdate(@Valid ReservedDto reservedDto, BindingResult bindingResult,Model model, ReservedHistDto reservedHistDto) {
 		
 		if(bindingResult.hasErrors()) {
 			return "main";

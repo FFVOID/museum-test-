@@ -19,6 +19,7 @@ public class ReservedHistDto {
 	
 	//엔티티를 dto로 변환
 	public ReservedHistDto(Reserved reserved) {
+		
 		this.reservedId = reserved.getId();
 		this.reservedDate = reserved.getReservedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		
@@ -32,6 +33,7 @@ public class ReservedHistDto {
 	private List<ReservationDto> reservationDtoList = new ArrayList<>();
 	
 	public void addReservationDtoList(ReservationDto reservationDto) {
+		
 		this.reservationDtoList.add(reservationDto);
 	}
 	

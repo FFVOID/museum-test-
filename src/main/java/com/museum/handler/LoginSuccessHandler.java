@@ -28,8 +28,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	// 간편 로그인 성공시 정보를 sns전용 회원가입 페이지로 전달
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 		
 		if (authentication instanceof OAuth2AuthenticationToken) {
 			OAuth2User oauthUser = ((OAuth2AuthenticationToken) authentication).getPrincipal();
@@ -44,6 +43,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 				Member member = memberRepository.findByEmail(email1);
 
 				if (member == null) {
+					
 					SecurityContextHolder.getContext().setAuthentication(null);
 					Cookie email = new Cookie("email", email1);
 					email.setDomain("localhost");
