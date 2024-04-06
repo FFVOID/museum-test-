@@ -25,7 +25,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "reserved")
 @Getter
-@Setter
 @ToString
 public class Reserved extends BaseEntity{
 	
@@ -44,6 +43,8 @@ public class Reserved extends BaseEntity{
 	@OneToMany(mappedBy = "reserved" ,cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
 	private List<Reservation> reservationList = new ArrayList<>();
 	
+	protected Reserved() {}
+	
 	public void addReservationList(Reservation reservation) {
 		this.reservationList.add(reservation);
 		reservation.setReserved(this);
@@ -51,15 +52,12 @@ public class Reserved extends BaseEntity{
 	
 	//예약생성(예약완료)
 	public static Reserved createReserved(Member member, List<Reservation> reservationItemList) {
-		
 		Reserved reserved = new Reserved();
-		reserved.setMember(member);
-		
-		for(Reservation reservationList : reservationItemList) {
-			reserved.addReservationList(reservationList);
+		reserved.member = member;
+		for(Reservation reservation : reservationItemList) {
+			reserved.addReservationList(reservation);
 		}
-		
-		reserved.setReservedDate(LocalDateTime.now());
+		reserved.reservedDate = LocalDateTime.now();
 		
 		return reserved;
 	}

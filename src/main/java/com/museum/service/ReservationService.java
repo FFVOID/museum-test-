@@ -53,10 +53,9 @@ public class ReservationService {
 	        throw new RuntimeException("예약 인원이 다차서 예약이 불가능합니다");
 	    }
 		
-		item.setStock(item.newStock(reservedDto.getCount()));
+		item.newStock(reservedDto.getCount());
 		
 		Reservation reservationItem = Reservation.createReservation(item, reservedDto.getReservedNm(),reservedDto.getDate(), reservedDto.getCount());
-		
 		reservationItemList.add(reservationItem);
 		
 		//회원 정보와 예약할 전시 리스트 정보를 이용하여 예약 엔티티를 생성
@@ -151,12 +150,12 @@ public class ReservationService {
 	    System.out.println(reCount);
 		
 	    Item item = reservation.getItem();
-	    int newStock = item.getStock() - reCount;
-	    if (newStock < 0) {
+	    int Stock = item.getStock();
+	    if (Stock < 0) {
 	        throw new RuntimeException("예약이 불가능합니다");
 	    }
 	    
-	    item.setStock(newStock);
+	    item.newStock(reCount);
 	    
 	    itemRepository.save(item);
 	    
@@ -176,10 +175,8 @@ public class ReservationService {
 		Item item = reservation.getItem();
 		
 		int preCount = reservation.getCount();
-	    int currentCount = reservation.getItem().getStock();
-	    int reCount = currentCount + preCount;
 	    
-	    item.setStock(reCount);
+	    item.updateStock(preCount);
 		
 		itemRepository.save(item);
 		

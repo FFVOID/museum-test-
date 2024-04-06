@@ -35,8 +35,13 @@ public class ItemService {
 	//전시 등록
 	public Long saveItem(NewItemDto newItemDto, List<MultipartFile> itemImgFileList,Item items) throws Exception {
 		
-		Item item = newItemDto.createItem(); //dto -> entity
-		item.setStock(100);
+		if(newItemDto.getStock() == null) {
+			newItemDto.setStock(100);
+			System.out.println("1==" + newItemDto.getItemDate());
+			System.out.println("dsfasd= " + newItemDto.getStock());
+		}
+		
+		Item item = newItemDto.toItem(); //dto -> entity
 		itemRepository.save(item); //저장
 		
 		//이미지 등록

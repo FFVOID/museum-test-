@@ -44,10 +44,15 @@ public class AdminController {
 	@PostMapping(value = "/admin/newItem")
 	public String itemNew(@Valid NewItemDto newItemDto, BindingResult bindingResult, Model model, 
 			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Item items) {
+		System.out.println("1123==" + newItemDto.getItemDate());
+		System.out.println("adsfasdf " + newItemDto.getStock());
+		System.out.println("dasfasdfsdfsad++" + newItemDto.getItemNm());
 		
 		if(bindingResult.hasErrors()) {
 			return "admin/newItem";
 		}
+		
+		
 		
 		if(itemImgFileList.get(0).isEmpty()) {
 			model.addAttribute("errorMessage", "첫번째 소장품 이미지는 필수 입니다");

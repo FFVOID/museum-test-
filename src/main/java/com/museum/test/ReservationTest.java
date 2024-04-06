@@ -33,11 +33,7 @@ class ReservationTest {
     	
     	long startTime = System.nanoTime(); //시작 시간
     	
-        Item item = new Item();
-        item.setItemNm("전시명");
-        item.setItemDetail("전시설명");
-        item.setItemDate("전시날짜");
-        item.setStock(100);
+    	Item item = new Item("전시명", "전시설명", "전시날짜", 100);
         itemRepository.save(item);
 
         int numThreads = 10; //테스트할 스레드 수
