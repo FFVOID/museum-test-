@@ -143,11 +143,8 @@ public class ReservationService {
 		Reservation reservation = reservedRepository.findReservation(reservedHistDto.getReservedId());
 		
 		int preCount = reservation.getCount();
-		System.out.println(preCount);
 	    int currentCount = reservedDto.getCount();
-	    System.out.println(currentCount);
 	    int reCount = currentCount - preCount;
-	    System.out.println(reCount);
 		
 	    Item item = reservation.getItem();
 	    int Stock = item.getStock();

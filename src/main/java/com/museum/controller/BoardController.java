@@ -59,7 +59,6 @@ public class BoardController {
 		
 		//유효성검사 에러체크
 		if(bindingResult.hasErrors()) {
-			System.out.println("유효성검사체크");
 			return "board/new";
 		}
 		

@@ -47,9 +47,9 @@ public class Member {
 	
 	private String name; //카카오에서 주는 닉네임
 	
-	private String provider; // 카카오
+	private String provider; //카카오
 
-	private String providerId; // 카카오 기본키 id값
+	private String providerId; //카카오 기본키 id값
 	
 	public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
 		
@@ -60,7 +60,7 @@ public class Member {
 		member.setEmail(memberFormDto.getEmail());
 		member.setUserId(memberFormDto.getUserId());
 		member.setPassword(password);
-		// member.setRole(Role.ADMIN); // 관리자로 가입 할때
+		//member.setRole(Role.ADMIN); //관리자로 가입 할때
 		member.setRole(Role.ADMIN);
 		
 		return member;

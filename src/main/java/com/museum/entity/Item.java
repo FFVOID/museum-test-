@@ -60,7 +60,7 @@ public class Item extends BaseEntity{
 	//예약관리
     public int newStock(int count) {
         if (stock >= count) {
-            stock -= count; // 남은 인원 수를 감소
+            stock -= count;
         } else {
            
         }
