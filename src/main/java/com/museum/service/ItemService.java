@@ -33,33 +33,33 @@ public class ItemService {
 	private final ItemImgRepository itemImgRepository;
 	
 	//전시 등록
-	public Long saveItem(NewItemDto newItemDto, List<MultipartFile> itemImgFileList,Item items) throws Exception {
-		
-		if(newItemDto.getStock() == null) {
-			newItemDto.setStock(100);
-			System.out.println("1==" + newItemDto.getItemDate());
-			System.out.println("dsfasd= " + newItemDto.getStock());
-		}
-		
-		Item item = newItemDto.toItem(); //dto -> entity
-		itemRepository.save(item); //저장
-		
-		//이미지 등록
-		for(int i=0; i<itemImgFileList.size(); i++) {
-			
-			ItemImg itemImg = new ItemImg();
-			itemImg.setItem(item);
-			
-			if(i == 0) {
-				itemImg.setRepimgYn("Y");
-			} else {
-				itemImg.setRepimgYn("N");
-			}
-			
-			itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
-		}
-		
-		return item.getId();
+	public Long saveItem(NewItemDto newItemDto, List<MultipartFile> itemImgFileList) throws Exception {
+	    
+	    if (newItemDto.getStock() == null) {
+	        newItemDto.setStock(100);
+	        System.out.println("1==" + newItemDto.getItemDate());
+	        System.out.println("dsfasd= " + newItemDto.getStock());
+	    }
+	    System.out.println("ddddd");
+	    
+	    Item item = newItemDto.toItem(); // DTO -> Entity 변환
+	    itemRepository.save(item); // 저장
+	    
+	    // 이미지 등록
+	    for (int i = 0; i < itemImgFileList.size(); i++) {
+	        ItemImg itemImg = new ItemImg();
+	        itemImg.setItem(item);
+	        
+	        if (i == 0) {
+	            itemImg.setRepimgYn("Y");
+	        } else {
+	            itemImg.setRepimgYn("N");
+	        }
+	        
+	        itemImgService.saveItemImg(itemImg, itemImgFileList.get(i));
+	    }
+	    System.out.println("dsfs" + item.getId());
+	    return item.getId();
 	}
 	
 	//전시정보가져오기

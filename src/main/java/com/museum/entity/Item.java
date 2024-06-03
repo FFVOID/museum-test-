@@ -55,7 +55,23 @@ public class Item extends BaseEntity{
 	
 	}
 	
-	protected Item() {}
+	public Item() {}
+	
+	public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Integer getStock() {
+        return stock; // 기본값을 0으로 설정
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 	
 	//예약관리
     public int newStock(int count) {

@@ -36,7 +36,7 @@ class ReservationTest2 {
 	    	Item item = new Item("전시명", "전시설명", "전시날짜", 100);
 	        itemRepository.save(item);
 
-	        int numThreads = 10; // 테스트할 스레드 수
+	        int numThreads = 10; //테스트할 스레드 수
 	        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
 	        List<Long> reservationIds = new CopyOnWriteArrayList<>();

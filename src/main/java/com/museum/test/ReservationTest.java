@@ -57,14 +57,14 @@ class ReservationTest {
                         reservationId = reservationService.reserved(reservedDto, memberId);
                     } 
                     if (reservationId != null) {
-                        System.out.println("예약 성공: " + reservationId + ", 유저 아이디: " + memberId);
+                        System.out.println("예약성공: " + reservationId + ", 유저아이디: " + memberId);
                         reservationIds.add(reservationId);
                     } else {
-                        System.err.println("예약 실패,유저 아이디: " + memberId);
+                        System.err.println("예약실패,유저 아이디: " + memberId);
                         failedAttempts.add(memberId);
                     }
                 } catch (Exception e) {
-                    System.err.println("예약 시도 중 오류 발생. 유저 아이디: " + memberId + ", 오류: " + e.getMessage());
+                    System.err.println("예약시도 중 오류 발생. 유저아이디: " + memberId + ", 오류: " + e.getMessage());
                     failedAttempts.add(memberId);
                 }
             });

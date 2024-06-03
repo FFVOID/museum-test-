@@ -33,30 +33,34 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		//로그인에 대한 설정
-		http.authorizeHttpRequests(authorize -> authorize //페이지 접근권한에 관한 설정
-					.requestMatchers("/css/**" , "/js/**" , "/img/**" ,"/webfonts/**" ).permitAll()
-					.requestMatchers("/", "/members/**", "/exhibition/**" , "/email/**").permitAll()
-					.requestMatchers("/favicon.ico", "/error").permitAll()
-					.requestMatchers("/admin/**").hasRole("ADMIN")
-					.anyRequest().authenticated())
-			.oauth2Login(oauth2 -> oauth2 
-					.loginPage("/members/login")
-					.userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
-					.userService(principalOauth2UserService))
-					.successHandler(loginSuccessHandler)
-					.failureUrl("/members/login/error")
-					)
-			.formLogin(formLogin -> formLogin 
-					 .loginPage("/members/login")
-					 .defaultSuccessUrl("/") 
-					 .usernameParameter("userId")
-					 .failureUrl("/members/login/error"))
-			.logout(logout -> logout //로그아웃 설정 
-					.logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-					.logoutSuccessUrl("/"))
-			.exceptionHandling(handling -> handling //인증되지 않은 사용자가 리소스에 접근했을때 설정
-					.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
-			.rememberMe(Customizer.withDefaults());
+		http.authorizeHttpRequests(authorize -> authorize
+	            .requestMatchers("/css/**", "/js/**", "/img/**", "/webfonts/**").permitAll()
+	            .requestMatchers("/", "/members/**", "/exhibition/**", "/email/**").permitAll()
+	            .requestMatchers("/favicon.ico", "/error").permitAll()
+	            .requestMatchers("/admin/**").hasRole("ADMIN")
+	            .requestMatchers("/reservation/**").authenticated()  // 인증된 사용자만 접근 허용
+	            .anyRequest().authenticated())
+	        .oauth2Login(oauth2 -> oauth2
+	            .loginPage("/members/login")
+	            .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+	                .userService(principalOauth2UserService))
+	            .successHandler(loginSuccessHandler)
+	            .failureUrl("/members/login/error"))
+	        .formLogin(formLogin -> formLogin
+	            .loginPage("/members/login")
+	            .defaultSuccessUrl("/")
+	            .usernameParameter("userId")
+	            .failureUrl("/members/login/error"))
+	        .logout(logout -> logout
+	            .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+	            .logoutSuccessUrl("/"))
+	        .exceptionHandling(handling -> handling
+	            .authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
+	        .rememberMe(Customizer.withDefaults())
+	        .httpBasic(Customizer.withDefaults());
+			
+			http.csrf(csrf -> csrf.disable());  // CSRF 보호 비활성화 엔그라인더 테스트때문
+		
 		
 			return http.build();
 	}

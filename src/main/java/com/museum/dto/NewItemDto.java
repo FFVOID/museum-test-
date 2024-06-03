@@ -3,17 +3,22 @@ package com.museum.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.spi.MappingContext;
 
 import com.museum.entity.Item;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class NewItemDto {
+	
 	private Long id;
 	
 	@NotBlank(message = "전시명은 필수 입력 값입니다")
@@ -25,7 +30,8 @@ public class NewItemDto {
 	@NotBlank(message = "전시날짜는 필수 입력값입니다")
 	private String itemDate;
 	
-	private Integer stock;
+	@NotNull(message = "재고는 필수 입력 값입니다")
+    private Integer stock = 100;
 	
 	//전시소장품 이미지 정보를 저장 
 	private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
@@ -34,7 +40,7 @@ public class NewItemDto {
 	private List<Long> itemImgIds = new ArrayList<>();
 	
 	private static ModelMapper modelMapper = new ModelMapper();
-			
+		
 	public Item toItem() {
 	    return new Item(this.itemNm, this.itemDetail, this.itemDate, this.stock);
 	}

@@ -43,25 +43,26 @@ public class AdminController {
 	//전시,소장품이미지 등록
 	@PostMapping(value = "/admin/newItem")
 	public String itemNew(@Valid NewItemDto newItemDto, BindingResult bindingResult, Model model, 
-			@RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Item items) {
-		
-		if(bindingResult.hasErrors()) {
-			return "admin/newItem";
-		}
-		
-		if(itemImgFileList.get(0).isEmpty()) {
-			model.addAttribute("errorMessage", "첫번째 소장품 이미지는 필수 입니다");
-			return "admin/newItem";
-		}
-		
-		try {
-			itemService.saveItem(newItemDto, itemImgFileList, items);
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("errorMessage" , "상품 등록 중 에러가 발생했습니다");
-		}
-		
-		return "redirect:/";
+	        @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
+	    
+	    if (bindingResult.hasErrors()) {
+	        return "admin/newItem";
+	    }
+	    
+	    if (itemImgFileList.get(0).isEmpty()) {
+	        model.addAttribute("errorMessage", "첫번째 소장품 이미지는 필수 입니다");
+	        return "admin/newItem";
+	    }
+	    
+	    try {
+	        itemService.saveItem(newItemDto, itemImgFileList);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("errorMessage", "상품 등록 중 에러가 발생했습니다");
+	        return "admin/newItem";
+	    }
+	    
+	    return "redirect:/";
 	}
 	
 	//전시관리페이지
