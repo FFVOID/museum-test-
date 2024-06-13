@@ -3,21 +3,21 @@ package com.museum.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.spi.MappingContext;
 
 import com.museum.entity.Item;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
+import java.io.Serializable;
 
 @Getter
 @Setter
-public class NewItemDto {
+public class NewItemDto implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,13 @@ import com.museum.dto.ItemImgDto;
 import com.museum.dto.ItemSearchDto;
 import com.museum.dto.MainItemDto;
 import com.museum.dto.NewItemDto;
-import com.museum.entity.Board;
 import com.museum.entity.Item;
 import com.museum.entity.ItemImg;
 import com.museum.repository.ItemImgRepository;
 import com.museum.repository.ItemRepository;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +68,7 @@ public class ItemService {
 	
 	//전시정보가져오기
 	@Transactional(readOnly = true)
+	@Cacheable(value = "itemDetails", key = "#itemId")
 	public NewItemDto getItemDtl(Long itemId) {
 		
 		List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
@@ -146,4 +151,9 @@ public class ItemService {
         	
         }
 	}
+	
+	@Caching(evict = {@CacheEvict(value = "itemDetails", allEntries = true)})
+    public void evictAllCaches() {
+        //모든 캐시를 무효화
+    }
 }

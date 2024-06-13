@@ -1,6 +1,5 @@
 package com.museum.service;
 
-import java.util.List;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.museum.entity.BoardComment;
 import com.museum.entity.Member;
 import com.museum.repository.BoardCommentRepository;
 import com.museum.repository.MemberRepository;

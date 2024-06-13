@@ -38,7 +38,7 @@ public class SecurityConfig {
 	            .requestMatchers("/", "/members/**", "/exhibition/**", "/email/**").permitAll()
 	            .requestMatchers("/favicon.ico", "/error").permitAll()
 	            .requestMatchers("/admin/**").hasRole("ADMIN")
-	            .requestMatchers("/reservation/**").authenticated()  // 인증된 사용자만 접근 허용
+	            .requestMatchers("/reservation/**").authenticated()  //인증된 사용자만 접근 허용
 	            .anyRequest().authenticated())
 	        .oauth2Login(oauth2 -> oauth2
 	            .loginPage("/members/login")
@@ -59,7 +59,7 @@ public class SecurityConfig {
 	        .rememberMe(Customizer.withDefaults())
 	        .httpBasic(Customizer.withDefaults());
 			
-			http.csrf(csrf -> csrf.disable());  // CSRF 보호 비활성화 엔그라인더 테스트때문
+			//http.csrf(csrf -> csrf.disable());  //CSRF 보호 비활성화
 		
 		
 			return http.build();
