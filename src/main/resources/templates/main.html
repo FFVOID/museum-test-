@@ -11,9 +11,21 @@
 	}
 	
 	.mx-auto > img {
-		weight: 500px;
 		height: 500px;
+	}
+	
+	.me-2 {
+		width: 300px;
+		font-size: 18px !important;
+	}
+	
+	.btn-outline-success{
+		width: 70px;
 		
+	}
+	
+	.d-flex{
+		justify-content: center;
 	}
 	
 	
@@ -21,6 +33,12 @@
 </th:block>
 
 <div layout:fragment="content">
+					<div style="margin: 13px;">
+						<form class="d-flex" role="search" onsubmit="return redirectAPISearch(event)">
+					        <input id="searchInput" class="form-control me-2" type="search" placeholder="소장품을 검색해보세요." aria-label="Search">
+					        <button class="btn btn-outline-success" type="submit">검색</button>
+				    	</form>
+					</div>
 	    <!-- Start Banner Hero -->
     <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -114,4 +132,18 @@
     </section>
     <!-- End Featured Product -->
 </div>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		function redirectAPISearch(event) {
+			event.preventDefault();//폼제출막음
+			const query = document.getElementById('searchInput').value;
+			if (query) {
+				const apiURL = `https://www.museum.go.kr/site/main/relic/search/collectionList?query=${encodeURIComponent(query)}`;
+				window.open(apiURL, '_blank');
+			} else {
+				alert('검색어를 입력하세요.');
+			}
+		}
+	</script>
+</th:block>
 </html>

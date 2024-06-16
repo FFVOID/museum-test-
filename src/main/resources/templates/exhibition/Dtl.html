@@ -11,40 +11,56 @@
 
 <th:block layout:fragment="css">
 	<style>
-	
+	.main {
+		justify-content: center;
+		text-align: center;
+	}
 
-.main {
-	justify-content: center;
-	text-align: center;
-}
+	.itemImgs>img {
+		height: 520px;
+	}
 
-.itemImgs>img {
-	height: 520px;
-}
+	.mains {
+		display: block;
+	}
 
-.mains {
-	display: block;
-}
+	.mainsitem {
+		display: flex;
+		justify-content: center;
+	}
 
-.mainsitem{
-	display: flex;
-	justify-content: center;
-}
+	.mb-4 {
+		width: 33%;
+		margin-right: 10px;
+	}
 
-.mb-4 {
- width: 33%;
- margin-right: 10px;
-}
+	.title {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		font-size: 34px !important;
+	}
 
-.title{
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
+	.btn-primary {
+		margin-bottom: 10px;
+	}
 
-.btn-primary{
-	margin-bottom: 10px;
-}
-</style>
+	.d-flex {
+		justify-content: center;
+	}
+
+	.me-2 {
+		width: 33%;
+		font-size: 17px !important;
+	}
+
+	.col-md-12 {
+		text-align: center;
+	}
+
+	.black2 {
+		font-size: 20px !important;
+	}
+	</style>
 </th:block>
 
 <div layout:fragment="content">
@@ -52,8 +68,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 mb-0">
-					<strong class="text-black">전시상세</strong>
-					
+					<p class="text-black black2">전시 상세 페이지<p>
+					<form class="d-flex" role="search" onsubmit="return redirectAPISearch(event)">
+				        <input id="searchInput" class="form-control me-2" type="search" placeholder="소장품을 검색해보세요." aria-label="Search">
+				        <button class="btn btn-outline-success" type="submit">검색</button>
+				    </form>
 				</div>
 			</div>
 		</div>
@@ -63,11 +82,10 @@
 		<div class="container">
 			<div class="row main">
 				<input type="hidden" id="exhibitionId" th:value="${exhibition.id}">
-				<!-- form태그는 동기, 여기서는 비동기 -->
 				<div>
 					<h1 class="text-black title" th:text="${exhibition.itemNm}"></h1>
-					<h3>전시 설명</h3>
-					<p style="white-space:pre;" th:text= "${exhibition.itemDetail}"></p>
+					<h4>전시 설명</h4>
+					<p style="white-space:pre;" th:text="${exhibition.itemDetail}"></p>
 					<h4>전시 기간</h4>
 					<h3 th:text="${exhibition.itemDate}"></h3>
 					<button type="button" class="btn btn-primary" onclick="location.href='/reservation/item'">예약하기</button>
@@ -77,21 +95,19 @@
 				    로그인이 필요합니다.
 				</div>
 				<div class="row mains">
-						<div class="col-md-12 mainsitem">
-					<th:block th:if="${not #lists.isEmpty(exhibition.itemImgDtoList)}" 
+					<div class="col-md-12 mainsitem">
+						<th:block th:if="${not #lists.isEmpty(exhibition.itemImgDtoList)}"
 							th:each="itemImg, status : ${exhibition.itemImgDtoList}">
 							<div class="card mb-4 product-wap rounded-0" th:if="${not #lists.isEmpty(itemImg.imgUrl)}">
-								<div class="card rounded-0  itemImgs" >
-									<img th:src="${itemImg.imgUrl}" 
-									class="card-img-top" th:alt="${itemImg.oriImgName}">
+								<div class="card rounded-0 itemImgs">
+									<img th:src="${itemImg.imgUrl}" class="card-img-top" th:alt="${itemImg.oriImgName}">
 								</div>
-								<div class="card-body" >
-									<p class="text-center mb-0"
-										th:text="${#strings.replace(itemImg.oriImgName, '.jpg' ,'')}"></p>
+								<div class="card-body">
+									<p class="text-center mb-0" th:text="${#strings.replace(itemImg.oriImgName, '.jpg', '')}"></p>
 								</div>
 							</div>
-						</div>
-					</th:block>
+						</th:block>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -99,12 +115,18 @@
 	</div>
 </div>
 
-
-
-
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
-	
+		function redirectAPISearch(event) {
+			event.preventDefault();//폼제출막음
+			const query = document.getElementById('searchInput').value;
+			if (query) {
+				const apiURL = `https://www.museum.go.kr/site/main/relic/search/collectionList?query=${encodeURIComponent(query)}`;
+				window.open(apiURL, '_blank');
+			} else {
+				alert('검색어를 입력하세요.');
+			}
+		}
 	</script>
 </th:block>
 </html>
